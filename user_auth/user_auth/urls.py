@@ -18,9 +18,11 @@ Including another URLconf
 from django.urls import path
 
 from users.views import RegisterView, LoginView, LogoutView
+from products.views import ProductListView
 
 urlpatterns = [
-    path('api/auth/register', RegisterView.as_view()),
-    path('api/auth/login', LoginView.as_view()),
-    path('api/auth/logout', LogoutView.as_view()),
+    path('api/auth/register', RegisterView.as_view(), name='register'),
+    path('api/auth/login', LoginView.as_view(), name='login'),
+    path('api/auth/logout', LogoutView.as_view(), name='logout'),
+    path('api/auth/products', ProductListView.as_view(), name='products'),
 ]
