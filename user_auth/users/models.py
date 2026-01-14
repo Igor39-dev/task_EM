@@ -9,3 +9,14 @@ class User(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True)
     
+
+
+"""
+{
+    "first_name": "user1",
+    "last_name": "surname1",
+    "middle_name": "midname1",
+    "email": "user1@mail.com",
+    "password": "123456"
+}
+"""
