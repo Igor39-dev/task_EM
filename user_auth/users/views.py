@@ -6,6 +6,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 
 from users.models import User
+from user_auth.authentications import JWTAuthentication
 
 def generate_token(user):
     payload = {
@@ -59,3 +60,24 @@ class LogoutView(APIView):
         response = Response({"status": "ok"})
         response.delete_cookie('access_token')
         return response
+
+
+class DeleteAccountView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def post(self, request):
+        if not request.user:
+            return Response({'detail': 'Invalid credentials'}, status=401)
+        
+        request.user.is_active = False
+        request.user.save()
+
+        response = Response({
+            'status': 'success',
+            'message': 'Account successfully deactivated'
+        })
+
+        response.delete_cookie('access_token')
+
+        return response
+    

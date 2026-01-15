@@ -17,7 +17,7 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
-from users.views import RegisterView, LoginView, LogoutView
+from users.views import RegisterView, LoginView, LogoutView, DeleteAccountView
 from products.views import ProductListView
 
 urlpatterns = [
@@ -25,4 +25,5 @@ urlpatterns = [
     path('api/auth/login', LoginView.as_view(), name='login'),
     path('api/auth/logout', LogoutView.as_view(), name='logout'),
     path('api/auth/products', ProductListView.as_view(), name='products'),
+    path('api/user/delete', DeleteAccountView.as_view(), name='delete')
 ]
