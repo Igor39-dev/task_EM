@@ -81,3 +81,52 @@ class DeleteAccountView(APIView):
 
         return response
     
+
+class UpdateAccountView(APIView):
+    authentication_classes = [JWTAuthentication]
+
+    def get(self, request):
+        if not request.user:
+            return Response({'detail': 'Invalid credentials'}, status=401)
+
+        user = request.user
+        return Response({
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "middle_name": user.middle_name,
+            "email": user.email
+        })
+
+    def put(self, request):
+        if not request.user:
+            return Response({'detail': 'Invalid credentials'}, status=401)
+        
+        user = request.user
+        data = request.data
+
+        allowed_fields = ['first_name', 'last_name', 'middle_name']
+
+        updated = False
+
+        for field in allowed_fields:
+            if field in data:
+                if data[field] != getattr(user, field, None):
+                    setattr(user, field, data[field])
+                    updated = True
+
+        if updated:
+            user.save()
+            message = 'Profile updated successfully'
+        else:
+            message = 'No changes'
+
+        return Response({
+            'status': 'success',
+            'message': message,
+            'user': {
+                'first_name': user.first_name,
+                'last_name': user.last_name,
+                'middle_name': user.middle_name,
+                'email': user.email
+            }                      
+        })

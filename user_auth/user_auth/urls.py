@@ -17,13 +17,14 @@ Including another URLconf
 # from django.contrib import admin
 from django.urls import path
 
-from users.views import RegisterView, LoginView, LogoutView, DeleteAccountView
+from users.views import RegisterView, LoginView, LogoutView, DeleteAccountView, UpdateAccountView
 from products.views import ProductListView
 
 urlpatterns = [
-    path('api/auth/register', RegisterView.as_view(), name='register'),
-    path('api/auth/login', LoginView.as_view(), name='login'),
-    path('api/auth/logout', LogoutView.as_view(), name='logout'),
-    path('api/auth/products', ProductListView.as_view(), name='products'),
-    path('api/user/delete', DeleteAccountView.as_view(), name='delete')
+    path('api/auth/register/', RegisterView.as_view(), name='register'),
+    path('api/auth/login/', LoginView.as_view(), name='login'),
+    path('api/auth/logout/', LogoutView.as_view(), name='logout'),
+    path('api/auth/products/', ProductListView.as_view(), name='products'),
+    path('api/user/delete/', DeleteAccountView.as_view(), name='delete'),
+    path('api/user/profile/', UpdateAccountView.as_view(), name='update-profile'),
 ]

@@ -19,4 +19,20 @@ class User(models.Model):
     "email": "user1@mail.com",
     "password": "123456"
 }
+
+{
+    "first_name": "user2",
+    "last_name": "surname2",
+    "middle_name": "midname2",
+    "email": "user2@mail.com",
+    "password": "234567"
+}
+
+{
+    "first_name": "user3",
+    "last_name": "surname3",
+    "middle_name": "midname3",
+    "email": "user3@mail.com",
+    "password": "345678"
+}
 """
